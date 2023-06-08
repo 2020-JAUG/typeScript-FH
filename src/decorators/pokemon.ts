@@ -37,7 +37,8 @@ function CheckValidPokemon() {
 @printToConsoleConditional(false)
 export class Pokemon {
 
-    private PokeApi: string = 'https://pokeapi.co/';
+    @readOnly(true)
+    public PokeApi: string = 'https://pokeapi.co/';
 
     constructor(
         public name: string
@@ -52,5 +53,30 @@ export class Pokemon {
 
 }
 
+function readOnly(isWritable: boolean = true): Function {
 
+    return function (target: any, propertyKey: string) {
+
+        const descriptor: PropertyDescriptor = {
+
+            get() {
+                console.log(this);
+                return 'Alejandro';
+            },
+            set(this, val) {
+                // console.log(this, val);
+
+                Object.defineProperty(this, propertyKey, {
+
+                    value: val,
+                    writable: !isWritable,
+                    enumerable: false
+                })
+            }
+        }
+
+        return descriptor;
+
+    }
+}
 

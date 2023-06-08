@@ -12,6 +12,7 @@ const charmander = new Pokemon('Charmander');
 // console.log(charmander.savePokemon(50));
 // charmander.savePokemon(0);
 
+charmander.PokeApi = new Pokemon('https://localhost:9090');
 console.log(charmander);
 
 
